@@ -21,8 +21,9 @@
   --mt:  #e67e22;   /* Metatranscriptomics */
   --mb:  #9b59b6;   /* Metabolomics       */
   --pt:  #e74c3c;   /* Proteomics         */
-  --ci:  #2980b9;   /* Clinical           */
-  --im:  #1abc9c;   /* Imaging            */
+  --om:  #34495e;   /* Outcomes/Metadata */
+  --dt:  #ccb100;   /* Diet              */
+  --ep:  #300465;   /* Epigenomics       */
 }
 body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -291,8 +292,31 @@ body.home-page {
 .aicon-mt  { background: var(--mt);  }
 .aicon-mb  { background: var(--mb);  }
 .aicon-pt  { background: var(--pt);  }
-.aicon-ci  { background: var(--ci);  }
-.aicon-im  { background: var(--im);  }
+.aicon-om  { background: var(--om);  }
+.aicon-dt  { background: var(--dt);  }
+.aicon-ep  { background: var(--ep);  }
+.aicon[data-tooltip] {
+  position: relative;
+}
+.aicon[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card-bg);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 1;
+}
+.aicon[data-tooltip]::after {
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
 /* Legend */
 .legend-box {
   background: var(--card-bg);
@@ -643,6 +667,28 @@ body.home-page {
   border-radius: 0 var(--radius) var(--radius) 0;
   margin-bottom: 14px;
   font-size: 0.92rem;
+}
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.filter-btn {
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: 0;
+}
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--secondary);
+  color: #fff;
 }
 /* =============================================
    PIPELINES PAGE

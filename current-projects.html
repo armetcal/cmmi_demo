@@ -21,84 +21,49 @@
       <!-- Project Cards -->
       <div>
         <h1 class="page-section-title"><span></span>Active Research Projects</h1>
+        <div class="project-filters">
+          <button class="filter-btn" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="mg">Metagenomics</button>
+          <button class="filter-btn" data-filter="mb">Metabolomics</button>
+          <button class="filter-btn" data-filter="mt">Metatranscriptomics</button>
+          <button class="filter-btn" data-filter="pt">Proteomics</button>
+          <button class="filter-btn" data-filter="dt">Diet</button>
+          <button class="filter-btn" data-filter="ep">Epigenomics</button>
+          <button class="filter-btn" data-filter="om">Outcomes/Metadata</button>
+        </div>
         <div class="projects-grid">
           <!-- CMMI-001 -->
-          <a href="projects/project-alpha.html" class="project-card">
+          <a href="projects/project-alpha.html" class="project-card" data-icons="mg,mb,mt">
             <h3>CMMI-001</h3>
             <p class="project-desc">
-              Gut microbiome dynamics in inflammatory bowel disease (IBD).
-              Longitudinal stool sampling with paired multi-omics.
+              Does the microbiome influence blood metabolites in a sex-dependent manner?
             </p>
             <div class="project-icons">
-              <span class="aicon aicon-mg" title="Metagenomics">MG</span>
-              <span class="aicon aicon-mt" title="Metatranscriptomics">MT</span>
+              <span class="aicon aicon-mg" data-tooltip="Metagenomics">MG</span>
+              <span class="aicon aicon-mb" data-tooltip="Metabolomics">MB</span>
+              <span class="aicon aicon-mt" data-tooltip="Metatranscriptomics">MT</span>
             </div>
           </a>
           <!-- CMMI-002 -->
-          <a href="projects/project-beta.html" class="project-card">
+          <a href="projects/project-beta.html" class="project-card" data-icons="mg,om">
             <h3>CMMI-002</h3>
             <p class="project-desc">
-              Aging microbiome study. Cross-sectional and longitudinal
-              characterisation of the gut microbiome in healthy older adults.
+              Is Ruthenibacterium lactatiformans’ behaviour dependent on its environment?
             </p>
             <div class="project-icons">
-              <span class="aicon aicon-mg" title="Metagenomics">MG</span>
-              <span class="aicon aicon-mb" title="Metabolomics">MB</span>
-              <span class="aicon aicon-ci" title="Clinical">CI</span>
+              <span class="aicon aicon-mg" data-tooltip="Metagenomics">MG</span>
+              <span class="aicon aicon-om" data-tooltip="Outcomes/Metadata">OM</span>
             </div>
           </a>
           <!-- CMMI-003 -->
-          <a href="projects/project-gamma.html" class="project-card">
+          <a href="projects/project-gamma.html" class="project-card" data-icons="dt,ep">
             <h3>CMMI-003</h3>
             <p class="project-desc">
-              Parkinson's disease gut-brain axis. Investigating microbial and
-              metabolic signatures in PD patients vs. matched controls.
+              Does diet correlate with favourable epigenetic markers?
             </p>
             <div class="project-icons">
-              <span class="aicon aicon-mg"  title="Metagenomics">MG</span>
-              <span class="aicon aicon-mt"  title="Metatranscriptomics">MT</span>
-              <span class="aicon aicon-pt"  title="Proteomics">PT</span>
-            </div>
-          </a>
-          <!-- CMMI-004 -->
-          <a href="projects/project-delta.html" class="project-card">
-            <h3>CMMI-004</h3>
-            <p class="project-desc">
-              Dietary intervention trial. Monitoring microbiome response to a
-              standardised high-fibre dietary protocol.
-            </p>
-            <div class="project-icons">
-              <span class="aicon aicon-mg"  title="Metagenomics">MG</span>
-              <span class="aicon aicon-mt"  title="Metatranscriptomics">MT</span>
-              <span class="aicon aicon-mb"  title="Metabolomics">MB</span>
-              <span class="aicon aicon-ci"  title="Clinical">CI</span>
-            </div>
-          </a>
-          <!-- CMMI-005 -->
-          <a href="projects/project-epsilon.html" class="project-card">
-            <h3>CMMI-005</h3>
-            <p class="project-desc">
-              Immune-microbiome crosstalk. Characterising immune cell
-              populations alongside gut microbial composition.
-            </p>
-            <div class="project-icons">
-              <span class="aicon aicon-mg"  title="Metagenomics">MG</span>
-              <span class="aicon aicon-pt"  title="Proteomics">PT</span>
-              <span class="aicon aicon-ci"  title="Clinical">CI</span>
-            </div>
-          </a>
-          <!-- CMMI-006 -->
-          <a href="projects/project-zeta.html" class="project-card">
-            <h3>CMMI-006</h3>
-            <p class="project-desc">
-              Pilot multi-omics integration. Testing a joint analysis
-              framework combining all four omics layers.
-            </p>
-            <div class="project-icons">
-              <span class="aicon aicon-mg"  title="Metagenomics">MG</span>
-              <span class="aicon aicon-mt"  title="Metatranscriptomics">MT</span>
-              <span class="aicon aicon-mb"  title="Metabolomics">MB</span>
-              <span class="aicon aicon-pt"  title="Proteomics">PT</span>
+              <span class="aicon aicon-dt" data-tooltip="Diet">DT</span>
+              <span class="aicon aicon-ep" data-tooltip="Epigenomics">EP</span>
             </div>
           </a>
         </div>
@@ -123,15 +88,36 @@
           <span>Proteomics</span>
         </div>
         <div class="legend-item">
-          <span class="aicon aicon-ci">CI</span>
-          <span>Clinical</span>
+          <span class="aicon aicon-dt">DT</span>
+          <span>Diet</span>
         </div>
         <div class="legend-item">
-          <span class="aicon aicon-im">IM</span>
-          <span>Imaging</span>
+          <span class="aicon aicon-ep">EP</span>
+          <span>Epigenomics</span>
+        </div>
+        <div class="legend-item">
+          <span class="aicon aicon-om">OM</span>
+          <span>Outcomes/Metadata</span>
         </div>
       </aside>
     </div><!-- end projects-layout -->
   </main>
+  <script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const filter = this.getAttribute('data-filter');
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelectorAll('.project-card').forEach(card => {
+        const icons = card.getAttribute('data-icons').split(',');
+        if (filter === 'all' || icons.includes(filter)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
