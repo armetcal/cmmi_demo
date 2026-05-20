@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metatranscriptomics Tutorial – CMMI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>Metatranscriptomics – Tutorial</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <div class="tutorial-card">
+      <h2>Overview</h2>
+      <p>
+        This tutorial covers the CMMI metatranscriptomics processing pipeline.
+        RNA samples require careful handling; ensure the cold-chain protocol was
+        followed and check RIN scores (&ge;7 recommended) before proceeding.
+      </p>
+      <h2>Step 1 – Quality Control</h2>
+      <p>Run <code>fastp</code> as for metagenomics, but also check strandedness.</p>
+      <pre>fastp \
+  --in1 sample_R1.fastq.gz \
+  --in2 sample_R2.fastq.gz \
+  --out1 sample_R1_clean.fastq.gz \
+  --out2 sample_R2_clean.fastq.gz \
+  --thread 8</pre>
+      <h2>Step 2 – rRNA Depletion Check</h2>
+      <p>Verify that rRNA depletion was effective using <code>SortMeRNA</code>.</p>
+      <pre>sortmerna \
+  --ref /ref/sortmerna/rRNA_databases/ \
+  --reads sample_R1_clean.fastq.gz \
+  --reads sample_R2_clean.fastq.gz \
+  --aligned sample_rRNA \
+  --other sample_mRNA \
+  --threads 8 \
+  --fastx --paired_in</pre>
+      <p>Aim for &lt;5% rRNA in the mRNA fraction before proceeding.</p>
+      <h2>Step 3 – Host Removal &amp; Alignment</h2>
+      <p>Align with <code>STAR</code> using a combined host + reference genome index.</p>
+      <pre>STAR \
+  --runThreadN 16 \
+  --genomeDir /ref/star_hg38_gut/ \
+  --readFilesIn sample_mRNA_1.fastq.gz sample_mRNA_2.fastq.gz \
+  --readFilesCommand zcat \
+  --outSAMtype BAM SortedByCoordinate \
+  --outFileNamePrefix sample_</pre>
+      <h2>Step 4 – Feature Counting</h2>
+      <pre>featureCounts \
+  -T 8 \
+  -p -s 2 \
+  -a /ref/gut_genes.gtf \
+  -o sample_counts.txt \
+  sample_Aligned.sortedByCoord.out.bam</pre>
+      <h2>Step 5 – Differential Expression</h2>
+      <p>Import counts into R for DESeq2 or edgeR analysis.</p>
+      <pre><code class="r">library(DESeq2)
+library(tidyverse)
+counts <- read_tsv("merged_counts.tsv")
+meta   <- read_csv("sample_metadata.csv")
+dds <- DESeqDataSetFromMatrix(countData = counts,
+                               colData   = meta,
+                               design    = ~ condition)
+dds <- DESeq(dds)
+res <- results(dds, contrast = c("condition", "IBD", "control"))
+</code></pre>
+      <h2>Troubleshooting</h2>
+      <ul>
+        <li>High rRNA carryover (&gt;20%) — re-deplete or consider a new extraction.</li>
+        <li>Low mapping rate (&lt;50%) — check library strandedness parameter (<code>-s</code>).</li>
+        <li>Very few detectable genes — likely a degraded RNA sample; consult the QC report.</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>

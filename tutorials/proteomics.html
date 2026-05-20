@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proteomics Tutorial – CMMI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>Proteomics – Tutorial</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <div class="tutorial-card">
+      <h2>Overview</h2>
+      <p>
+        This tutorial describes the CMMI DIA proteomics workflow using
+        <code>DIA-NN</code> for spectral library generation and database search,
+        followed by statistical analysis with <code>MSstats</code> in R.
+      </p>
+      <h2>Step 1 – Spectral Library Generation</h2>
+      <p>
+        Generate a project-specific library from DDA runs using DIA-NN's
+        gas-phase fractionation (GPF) mode:
+      </p>
+      <pre>diann \
+  --f "dda_run_1.raw" "dda_run_2.raw" \
+  --lib "" \
+  --threads 16 \
+  --verbose 1 \
+  --out "library.tsv" \
+  --fasta /ref/uniprot_human_gut.fasta \
+  --fasta-search \
+  --min-fr-mz 200 --max-fr-mz 1800 \
+  --cut K*,R* \
+  --gen-spec-lib</pre>
+      <h2>Step 2 – DIA Database Search</h2>
+      <pre>diann \
+  --f "dia_run_1.raw" "dia_run_2.raw" \
+  --lib "library.tsv" \
+  --threads 16 \
+  --verbose 1 \
+  --out "report.tsv" \
+  --out-lib "report.lib.tsv" \
+  --qvalue 0.01</pre>
+      <h2>Step 3 – Import into R (MSstats)</h2>
+      <pre><code class="r">library(MSstats)
+library(tidyverse)
+raw <- read_tsv("report.tsv")
+meta <- read_csv("sample_metadata.csv")
+input <- DIANNtoMSstats(raw,
+                        annotation = meta,
+                        global_qvalue_cutoff = 0.01)
+processed <- dataProcess(input,
+                          normalization = "equalizeMedians",
+                          summaryMethod = "TMP",
+                          MBimpute = TRUE)
+</code></pre>
+      <h2>Step 4 – Differential Abundance</h2>
+      <pre><code class="r">contrast <- matrix(c(-1, 1), nrow=1,
+                   dimnames=list("IBD_vs_control",
+                                 c("control", "IBD")))
+result <- groupComparison(contrast, processed)
+sig    <- result$ComparisonResult |>
+          filter(adj.pvalue < 0.05, abs(log2FC) > 1)
+</code></pre>
+      <h2>Troubleshooting</h2>
+      <ul>
+        <li>Low protein IDs — check that the FASTA database matches the sample source.</li>
+        <li>High missing rate (&gt;50%) — lower the Q-value threshold or increase input protein.</li>
+        <li>MSstats convergence warnings — check that each protein has &ge;2 peptides.</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>

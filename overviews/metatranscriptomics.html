@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metatranscriptomics Overview – CMMI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>Metatranscriptomics – Overview</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <div class="overview-layout">
+      <!-- LEFT SIDEBAR -->
+      <aside class="overview-sidebar">
+        <div class="info-card">
+          <h3>Study Details</h3>
+          <div class="info-row"><strong>Biological material</strong><span>Stool</span></div>
+          <div class="info-row"><strong>Sample type</strong><span>RNA</span></div>
+          <div class="info-row"><strong>Paired data</strong><span>Metagenomics</span></div>
+          <div class="info-row"><strong>Contact</strong><span>B. Researcher</span></div>
+          <div class="info-row"><strong>Email</strong>
+            <a href="mailto:b.researcher@ubc.ca">b.researcher@ubc.ca</a>
+          </div>
+        </div>
+        <div class="workflow-svg-wrap">
+          <h3>Raw Data Workflow</h3>
+          <svg viewBox="0 0 220 310" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Metatranscriptomics raw data workflow diagram">
+            <style>
+              .wf-box { fill:#fef9eb; stroke:#e67e22; stroke-width:1.5; }
+              .wf-text { font-family:sans-serif; font-size:10px; fill:#7d4a00; text-anchor:middle; }
+              .wf-arrow { stroke:#7f8c8d; stroke-width:1.5; marker-end:url(#arr2); fill:none; }
+              .wf-label { font-family:sans-serif; font-size:8px; fill:#7f8c8d; text-anchor:middle; }
+            </style>
+            <defs>
+              <marker id="arr2" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#7f8c8d"/>
+              </marker>
+            </defs>
+            <rect x="35" y="10" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="30" class="wf-text">Raw FASTQ (RNA-seq)</text>
+            <line x1="110" y1="42" x2="110" y2="58" class="wf-arrow"/>
+            <rect x="35" y="58" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="78" class="wf-text">QC &amp; rRNA Depletion</text>
+            <text x="110" y="89" class="wf-label">SortMeRNA</text>
+            <line x1="110" y1="90" x2="110" y2="106" class="wf-arrow"/>
+            <rect x="35" y="106" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="126" class="wf-text">Host Removal (STAR)</text>
+            <line x1="110" y1="138" x2="110" y2="154" class="wf-arrow"/>
+            <rect x="35" y="154" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="174" class="wf-text">Alignment &amp; Counting</text>
+            <text x="110" y="185" class="wf-label">featureCounts</text>
+            <line x1="110" y1="186" x2="110" y2="202" class="wf-arrow"/>
+            <rect x="35" y="202" width="150" height="40" rx="6"
+                  style="fill:#fdebd0;stroke:#e67e22;stroke-width:1.5;"/>
+            <text x="110" y="220" class="wf-text" style="fill:#7d4a00;">Expression Tables</text>
+            <text x="110" y="234" class="wf-label" style="fill:#7d4a00;">Gene counts · phyloseq</text>
+          </svg>
+        </div>
+      </aside>
+      <!-- RIGHT MAIN CONTENT -->
+      <div class="overview-main">
+        <div class="section-card">
+          <h2>Purpose</h2>
+          <p>
+            To characterise the <em>active</em> transcriptome of the gut microbial
+            community — i.e., which genes are being expressed at the time of sampling.
+            Metatranscriptomics complements metagenomics by revealing functional activity
+            rather than just genetic potential.
+          </p>
+        </div>
+        <div class="section-card">
+          <h2>Data Types</h2>
+          <p><strong>Raw data type(s):</strong> FASTQ files (2×150 bp, stranded)</p>
+          <p>
+            <strong>Processed data type(s):</strong> gene expression count tables,
+            phyloseq objects (combined with metagenomics for paired analysis in R)
+          </p>
+          <p>
+            <strong>Data location:</strong> Currently stored on Sockeye / Compute Canada
+            <br /><code style="font-size:0.85em;background:#f4f4f4;padding:2px 6px;border-radius:4px;">
+              /arc/project/cmmi/metatranscriptomics/
+            </code>
+          </p>
+        </div>
+        <div class="section-card">
+          <h2>Key Considerations</h2>
+          <div class="highlight-box">
+            RNA is inherently less stable than DNA — sample handling is critical.
+            Paired metagenomics data are needed to normalise expression by gene copy number.
+          </div>
+          <ul>
+            <li>
+              <strong>rRNA dominates:</strong> ribosomal RNA can account for &gt;95% of
+              total RNA; depletion is essential to enrich for mRNA.
+            </li>
+            <li>
+              <strong>Paired analysis:</strong> MTX/MGX ratios reveal which genes are
+              being actively transcribed relative to their abundance in the genome.
+            </li>
+            <li>
+              <strong>Low-input challenge:</strong> stool RNA is often degraded;
+              RIN scores should be checked before sequencing.
+            </li>
+          </ul>
+        </div>
+        <div class="section-card">
+          <h2>Recommended Tools</h2>
+          <ul>
+            <li><strong>QC:</strong> fastp, FastQC</li>
+            <li><strong>rRNA depletion check:</strong> SortMeRNA</li>
+            <li><strong>Alignment:</strong> STAR (host), bowtie2 (microbial)</li>
+            <li><strong>Quantification:</strong> featureCounts, HTSeq</li>
+            <li><strong>Differential expression:</strong> DESeq2, edgeR</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

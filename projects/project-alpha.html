@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CMMI-001 – CMMI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>CMMI-001 – IBD Microbiome Study</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <!-- Analysis type bar -->
+    <div class="analysis-bar" aria-label="Available analysis types">
+      <span class="analysis-bar-label">Analyses:</span>
+      <span class="atag active">
+        <span class="aicon aicon-mg">MG</span> Metagenomics
+      </span>
+      <span class="atag active">
+        <span class="aicon aicon-mt">MT</span> Metatranscriptomics
+      </span>
+      <span class="atag inactive">
+        <span class="aicon aicon-mb">MB</span> Metabolomics
+      </span>
+      <span class="atag inactive">
+        <span class="aicon aicon-pt">PT</span> Proteomics
+      </span>
+      <span class="atag inactive">
+        <span class="aicon aicon-ci">CI</span> Clinical
+      </span>
+    </div>
+    <!-- About section -->
+    <section class="project-about">
+      <h2>About This Project</h2>
+      <p>
+        <strong>CMMI-001</strong> is a longitudinal study investigating gut microbiome
+        dynamics in patients with inflammatory bowel disease (IBD), including both
+        Crohn's disease and ulcerative colitis.
+      </p>
+      <p>
+        Stool samples are collected at enrolment and at 3-month intervals over two years.
+        Paired metagenomics and metatranscriptomics capture both the structural composition
+        and the active transcriptional output of the gut microbial community.
+      </p>
+      <p>
+        <strong>Primary aim:</strong> identify microbial taxa and functional pathways
+        associated with IBD flares, remission, and response to biologic therapy.
+      </p>
+    </section>
+    <!-- Analysis sections -->
+    <div class="analysis-sections">
+      <h2>Available Resources</h2>
+      <!-- Metagenomics -->
+      <div class="analysis-section-card">
+        <div class="analysis-section-header" style="background:var(--mg)">
+          <span class="aicon aicon-mg">MG</span>
+          Metagenomics
+        </div>
+        <div class="analysis-section-body">
+          <a href="../overviews/metagenomics.html" class="analysis-link-box">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+            <span>Overview</span>
+          </a>
+          <a href="../tutorials/metagenomics.html" class="analysis-link-box">
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            <span>Tutorial</span>
+          </a>
+        </div>
+      </div>
+      <!-- Metatranscriptomics -->
+      <div class="analysis-section-card">
+        <div class="analysis-section-header" style="background:var(--mt)">
+          <span class="aicon aicon-mt">MT</span>
+          Metatranscriptomics
+        </div>
+        <div class="analysis-section-body">
+          <a href="../overviews/metatranscriptomics.html" class="analysis-link-box">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+            <span>Overview</span>
+          </a>
+          <a href="../tutorials/metatranscriptomics.html" class="analysis-link-box">
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            <span>Tutorial</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metabolomics Overview – CMMI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>Metabolomics – Overview</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <div class="overview-layout">
+      <!-- LEFT SIDEBAR -->
+      <aside class="overview-sidebar">
+        <div class="info-card">
+          <h3>Study Details</h3>
+          <div class="info-row"><strong>Biological material</strong><span>Plasma / Urine / Stool</span></div>
+          <div class="info-row"><strong>Sample type</strong><span>Metabolite extract</span></div>
+          <div class="info-row"><strong>Paired data</strong><span>Metagenomics</span></div>
+          <div class="info-row"><strong>Contact</strong><span>C. Researcher</span></div>
+          <div class="info-row"><strong>Email</strong>
+            <a href="mailto:c.researcher@ubc.ca">c.researcher@ubc.ca</a>
+          </div>
+        </div>
+        <div class="workflow-svg-wrap">
+          <h3>Raw Data Workflow</h3>
+          <svg viewBox="0 0 220 290" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Metabolomics raw data workflow diagram">
+            <style>
+              .wf-box { fill:#f5eef8; stroke:#9b59b6; stroke-width:1.5; }
+              .wf-text { font-family:sans-serif; font-size:10px; fill:#5b2c6f; text-anchor:middle; }
+              .wf-arrow { stroke:#7f8c8d; stroke-width:1.5; marker-end:url(#arr3); fill:none; }
+              .wf-label { font-family:sans-serif; font-size:8px; fill:#7f8c8d; text-anchor:middle; }
+            </style>
+            <defs>
+              <marker id="arr3" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#7f8c8d"/>
+              </marker>
+            </defs>
+            <rect x="35" y="10" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="30" class="wf-text">Raw mzXML (LC-MS)</text>
+            <line x1="110" y1="42" x2="110" y2="58" class="wf-arrow"/>
+            <rect x="35" y="58" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="78" class="wf-text">Peak Detection (XCMS)</text>
+            <line x1="110" y1="90" x2="110" y2="106" class="wf-arrow"/>
+            <rect x="35" y="106" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="126" class="wf-text">Alignment &amp; Annotation</text>
+            <text x="110" y="137" class="wf-label">HMDB / KEGG</text>
+            <line x1="110" y1="138" x2="110" y2="154" class="wf-arrow"/>
+            <rect x="35" y="154" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="174" class="wf-text">Normalisation</text>
+            <line x1="110" y1="186" x2="110" y2="202" class="wf-arrow"/>
+            <rect x="35" y="202" width="150" height="40" rx="6"
+                  style="fill:#e8daef;stroke:#9b59b6;stroke-width:1.5;"/>
+            <text x="110" y="220" class="wf-text" style="fill:#5b2c6f;">Metabolite Tables</text>
+            <text x="110" y="234" class="wf-label" style="fill:#5b2c6f;">Intensity · pathway enrichment</text>
+          </svg>
+        </div>
+      </aside>
+      <!-- RIGHT MAIN CONTENT -->
+      <div class="overview-main">
+        <div class="section-card">
+          <h2>Purpose</h2>
+          <p>
+            To profile the small-molecule metabolites present in biological samples.
+            Metabolomics captures the downstream products of microbial and host metabolism,
+            providing a functional readout of the microbiome–host interaction.
+          </p>
+        </div>
+        <div class="section-card">
+          <h2>Data Types</h2>
+          <p><strong>Raw data type(s):</strong> mzXML files from LC-MS/MS (untargeted)</p>
+          <p>
+            <strong>Processed data type(s):</strong> metabolite intensity tables,
+            pathway enrichment results, R analysis objects
+          </p>
+          <p>
+            <strong>Data location:</strong> Currently stored on Sockeye / Compute Canada
+            <br /><code style="font-size:0.85em;background:#f4f4f4;padding:2px 6px;border-radius:4px;">
+              /arc/project/cmmi/metabolomics/
+            </code>
+          </p>
+        </div>
+        <div class="section-card">
+          <h2>Key Considerations</h2>
+          <div class="highlight-box">
+            Metabolomics data require careful normalisation and batch correction —
+            technical variation can dominate biological signal if uncorrected.
+          </div>
+          <ul>
+            <li>
+              <strong>Annotation:</strong> only ~30–50% of peaks can be confidently
+              identified using current databases; many remain as unknown features.
+            </li>
+            <li>
+              <strong>Matrix effects:</strong> different sample types (plasma vs. stool)
+              have distinct extraction and ionisation efficiencies.
+            </li>
+            <li>
+              <strong>Batch correction:</strong> pooled quality-control (QC) samples
+              must be included in every run.
+            </li>
+          </ul>
+        </div>
+        <div class="section-card">
+          <h2>Recommended Tools</h2>
+          <ul>
+            <li><strong>Peak detection:</strong> XCMS, MZmine3</li>
+            <li><strong>Annotation:</strong> HMDB, KEGG, MetaboAnalyst</li>
+            <li><strong>Normalisation:</strong> PQN, LOESS, ComBat</li>
+            <li><strong>Statistical analysis:</strong> MetaboAnalystR, limma, MaAsLin2</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

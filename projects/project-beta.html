@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CMMI-002 – CMMI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>CMMI-002 – Aging Microbiome Study</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <!-- Analysis type bar -->
+    <div class="analysis-bar" aria-label="Available analysis types">
+      <span class="analysis-bar-label">Analyses:</span>
+      <span class="atag active">
+        <span class="aicon aicon-mg">MG</span> Metagenomics
+      </span>
+      <span class="atag inactive">
+        <span class="aicon aicon-mt">MT</span> Metatranscriptomics
+      </span>
+      <span class="atag active">
+        <span class="aicon aicon-mb">MB</span> Metabolomics
+      </span>
+      <span class="atag inactive">
+        <span class="aicon aicon-pt">PT</span> Proteomics
+      </span>
+      <span class="atag active">
+        <span class="aicon aicon-ci">CI</span> Clinical
+      </span>
+    </div>
+    <!-- About section -->
+    <section class="project-about">
+      <h2>About This Project</h2>
+      <p>
+        <strong>CMMI-002</strong> characterises the gut microbiome and plasma metabolome
+        in a cohort of healthy older adults (65–85 years) to understand how the microbiome
+        changes with healthy aging.
+      </p>
+      <p>
+        Paired stool and plasma samples are collected alongside detailed clinical metadata
+        including diet, medication use, cognitive assessments, and frailty indices.
+      </p>
+      <p>
+        <strong>Primary aim:</strong> identify microbial and metabolic signatures
+        associated with healthy vs. accelerated aging trajectories.
+      </p>
+    </section>
+    <!-- Analysis sections -->
+    <div class="analysis-sections">
+      <h2>Available Resources</h2>
+      <!-- Metagenomics -->
+      <div class="analysis-section-card">
+        <div class="analysis-section-header" style="background:var(--mg)">
+          <span class="aicon aicon-mg">MG</span>
+          Metagenomics
+        </div>
+        <div class="analysis-section-body">
+          <a href="../overviews/metagenomics.html" class="analysis-link-box">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+            <span>Overview</span>
+          </a>
+          <a href="../tutorials/metagenomics.html" class="analysis-link-box">
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            <span>Tutorial</span>
+          </a>
+        </div>
+      </div>
+      <!-- Metabolomics -->
+      <div class="analysis-section-card">
+        <div class="analysis-section-header" style="background:var(--mb)">
+          <span class="aicon aicon-mb">MB</span>
+          Metabolomics
+        </div>
+        <div class="analysis-section-body">
+          <a href="../overviews/metabolomics.html" class="analysis-link-box">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+            <span>Overview</span>
+          </a>
+          <a href="../tutorials/metabolomics.html" class="analysis-link-box">
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            <span>Tutorial</span>
+          </a>
+        </div>
+      </div>
+      <!-- Clinical -->
+      <div class="analysis-section-card">
+        <div class="analysis-section-header" style="background:var(--ci)">
+          <span class="aicon aicon-ci">CI</span>
+          Clinical Data
+        </div>
+        <div class="analysis-section-body">
+          <a href="#" class="analysis-link-box">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+            <span>Overview</span>
+          </a>
+          <a href="#" class="analysis-link-box">
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            <span>Tutorial</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

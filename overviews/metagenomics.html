@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metagenomics Overview – CMMI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>Metagenomics – Overview</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <div class="overview-layout">
+      <!-- ======= LEFT SIDEBAR ======= -->
+      <aside class="overview-sidebar">
+        <!-- Box 1: Sample / study metadata -->
+        <div class="info-card">
+          <h3>Study Details</h3>
+          <div class="info-row">
+            <strong>Biological material</strong>
+            <span>Stool</span>
+          </div>
+          <div class="info-row">
+            <strong>Sample type</strong>
+            <span>DNA</span>
+          </div>
+          <div class="info-row">
+            <strong>Paired data</strong>
+            <span>Metatranscriptomics</span>
+          </div>
+          <div class="info-row">
+            <strong>Contact</strong>
+            <span>A. Researcher</span>
+          </div>
+          <div class="info-row">
+            <strong>Email</strong>
+            <a href="mailto:a.researcher@ubc.ca">a.researcher@ubc.ca</a>
+          </div>
+        </div>
+        <!-- Box 2: Raw data workflow diagram (SVG placeholder) -->
+        <div class="workflow-svg-wrap">
+          <h3>Raw Data Workflow</h3>
+          <svg viewBox="0 0 220 340" xmlns="http://www.w3.org/2000/svg"
+               aria-label="Metagenomics raw data workflow diagram">
+            <!-- Styles -->
+            <style>
+              .wf-box { fill:#ebf5fb; stroke:#2980b9; stroke-width:1.5; rx:6; }
+              .wf-text { font-family:sans-serif; font-size:10px; fill:#1a3a5c; text-anchor:middle; }
+              .wf-arrow { stroke:#7f8c8d; stroke-width:1.5; marker-end:url(#arr); fill:none; }
+              .wf-label { font-family:sans-serif; font-size:8px; fill:#7f8c8d; text-anchor:middle; }
+            </style>
+            <defs>
+              <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#7f8c8d"/>
+              </marker>
+            </defs>
+            <!-- Step 1: Raw FASTQ -->
+            <rect x="35" y="10" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="30" class="wf-text">Raw FASTQ (2×150 bp)</text>
+            <line x1="110" y1="42" x2="110" y2="58" class="wf-arrow"/>
+            <!-- Step 2: QC -->
+            <rect x="35" y="58" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="78" class="wf-text">Quality Control (fastp)</text>
+            <line x1="110" y1="90" x2="110" y2="106" class="wf-arrow"/>
+            <!-- Step 3: Host removal -->
+            <rect x="35" y="106" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="122" class="wf-text">Host Removal (Bowtie2)</text>
+            <text x="110" y="133" class="wf-label">hg38 reference genome</text>
+            <line x1="110" y1="138" x2="110" y2="154" class="wf-arrow"/>
+            <!-- Step 4: Taxonomy -->
+            <rect x="35" y="154" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="174" class="wf-text">Taxonomy (MetaPhlAn4)</text>
+            <line x1="110" y1="186" x2="110" y2="202" class="wf-arrow"/>
+            <!-- Step 5: Functional -->
+            <rect x="35" y="202" width="150" height="32" rx="6" class="wf-box"/>
+            <text x="110" y="222" class="wf-text">Function (HUMAnN3)</text>
+            <line x1="110" y1="234" x2="110" y2="250" class="wf-arrow"/>
+            <!-- Step 6: Output -->
+            <rect x="35" y="250" width="150" height="40" rx="6"
+                  style="fill:#d5f5e3;stroke:#27ae60;stroke-width:1.5;"/>
+            <text x="110" y="268" class="wf-text" style="fill:#1e8449;">Tables + phyloseq</text>
+            <text x="110" y="282" class="wf-label" style="fill:#1e8449;">Taxonomy · Function · Abundance</text>
+          </svg>
+        </div>
+      </aside><!-- end sidebar -->
+      <!-- ======= RIGHT MAIN CONTENT ======= -->
+      <div class="overview-main">
+        <div class="section-card">
+          <h2>Purpose</h2>
+          <p>
+            To determine the microbial members of the gut microbiome as well as their
+            functional capacity. Shotgun metagenomics sequences all the DNA in a stool
+            sample, providing simultaneous taxonomic and functional profiling of the entire
+            microbial community.
+          </p>
+        </div>
+        <div class="section-card">
+          <h2>Data Types</h2>
+          <p><strong>Raw data type(s):</strong> FASTQ files (2×150 bp paired-end)</p>
+          <p>
+            <strong>Processed data type(s):</strong> tables (taxonomy, gene families,
+            pathway abundances), phyloseq objects (combined tables for analysis in R)
+          </p>
+          <p>
+            <strong>Data location:</strong> Currently stored on Sockeye / Compute Canada
+            <br /><code style="font-size:0.85em;background:#f4f4f4;padding:2px 6px;border-radius:4px;">
+              /arc/project/cmmi/metagenomics/
+            </code>
+          </p>
+        </div>
+        <div class="section-card">
+          <h2>Key Considerations</h2>
+          <div class="highlight-box">
+            Microbiome data are <strong>compositional</strong> and <strong>not normally
+            distributed</strong> — they often require specialised statistical tools.
+            <a href="https://doi.org/10.3389/fmicb.2017.02224" target="_blank" rel="noopener">
+              10.3389/fmicb.2017.02224
+            </a>
+          </div>
+          <ul>
+            <li>
+              <strong>Compositional:</strong> each feature is influenced by every other
+              feature; raw counts are not directly comparable across samples.
+            </li>
+            <li>
+              <strong>Distribution:</strong> zero-inflated, roughly negative binomial;
+              standard parametric tests are generally inappropriate.
+            </li>
+            <li>
+              <strong>Taxonomy:</strong> most annotations are bacterial — some archaea
+              and fungi are also detected.
+            </li>
+            <li>
+              <strong>Viral annotations</strong> are available but via a separate pipeline
+              (see Pipelines page).
+            </li>
+          </ul>
+        </div>
+        <div class="section-card">
+          <h2>Recommended Tools</h2>
+          <ul>
+            <li><strong>Taxonomic profiling:</strong> MetaPhlAn4, Kraken2/Bracken</li>
+            <li><strong>Functional profiling:</strong> HUMAnN3 (UniRef90, MetaCyc)</li>
+            <li><strong>Diversity analysis:</strong> vegan, phyloseq (R)</li>
+            <li><strong>Differential abundance:</strong> DESeq2, ANCOM-BC, MaAsLin2</li>
+            <li><strong>Compositional tools:</strong> ALDEx2, ANCOM</li>
+          </ul>
+        </div>
+      </div><!-- end main content -->
+    </div><!-- end overview-layout -->
+  </main>
+</body>
+</html>

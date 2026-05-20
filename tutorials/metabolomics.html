@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metabolomics Tutorial – CMMI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>Metabolomics – Tutorial</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <div class="tutorial-card">
+      <h2>Overview</h2>
+      <p>
+        This tutorial describes the CMMI untargeted LC-MS metabolomics workflow.
+        Raw <code>.mzXML</code> files are processed with XCMS in R to detect, align,
+        and annotate metabolite features.
+      </p>
+      <h2>Step 1 – Convert Raw Files</h2>
+      <p>
+        Convert vendor-format raw files to open format using
+        <code>MSConvert</code> (ProteoWizard):
+      </p>
+      <pre>msconvert sample.raw \
+  --mzXML \
+  --filter "peakPicking vendor msLevel=1-2"</pre>
+      <h2>Step 2 – Peak Detection (XCMS)</h2>
+      <pre><code class="r">library(xcms)
+library(tidyverse)
+files <- list.files("mzxml/", pattern="\\.mzXML$", full.names=TRUE)
+pd    <- read_csv("sample_metadata.csv")
+raw  <- readMSData(files, pdata=new("NAnnotatedDataFrame", pd), mode="onDisk")
+cwp  <- CentWaveParam(ppm=10, peakwidth=c(5,30))
+xdata <- findChromPeaks(raw, param=cwp)
+</code></pre>
+      <h2>Step 3 – Alignment &amp; Gap Filling</h2>
+      <pre><code class="r">obp   <- ObiwarpParam(binSize=0.6)
+xdata <- adjustRtime(xdata, param=obp)
+pdp   <- PeakDensityParam(sampleGroups=pd$group, minFraction=0.5)
+xdata <- groupChromPeaks(xdata, param=pdp)
+xdata <- fillChromPeaks(xdata)
+feat  <- featureValues(xdata, value="into", missing=0)
+</code></pre>
+      <h2>Step 4 – Normalisation</h2>
+      <p>Apply probabilistic quotient normalisation (PQN) and log-transform:</p>
+      <pre><code class="r">pqn_norm <- function(mat) {
+  ref <- apply(mat, 1, median)
+  mat / rep(ref, ncol(mat))
+}
+feat_norm <- log1p(t(pqn_norm(feat)))
+</code></pre>
+      <h2>Step 5 – Annotation</h2>
+      <p>
+        Submit feature lists to <a href="https://www.metaboanalyst.ca" target="_blank"
+        rel="noopener">MetaboAnalyst</a> for pathway enrichment, or use the
+        <code>MetaboAnnotation</code> Bioconductor package for in-house matching.
+      </p>
+      <h2>Troubleshooting</h2>
+      <ul>
+        <li>Many missing values — lower <code>minFraction</code> or use gap-filling.</li>
+        <li>Poor alignment — try a smaller <code>binSize</code> in ObiwarpParam.</li>
+        <li>Batch effects — include pooled QC samples and apply LOESS correction.</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>

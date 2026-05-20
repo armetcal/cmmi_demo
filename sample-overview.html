@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sample Overview – CMMI</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>Sample Overview</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <h1 class="page-section-title"><span></span>Sample Collections</h1>
+    <!-- Tab Navigation -->
+    <div class="tab-nav" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true"
+              onclick="switchTab('pilot', this)">Pilot</button>
+      <button class="tab-btn" role="tab" aria-selected="false"
+              onclick="switchTab('healthy-aging', this)">Healthy Aging</button>
+      <button class="tab-btn" role="tab" aria-selected="false"
+              onclick="switchTab('parkinsons', this)">Parkinson's Disease</button>
+    </div>
+    <!-- ========================
+         TAB: PILOT
+         ======================== -->
+    <div id="tab-pilot" class="tab-content active">
+      <!-- Sample size circle -->
+      <div class="sample-circle" title="Pilot cohort sample size">
+        <span class="sc-number">24</span>
+        <span class="sc-label">Participants</span>
+      </div>
+      <!-- Biological material diagram -->
+      <div class="bio-diagram">
+        <div class="bio-source">
+          <div class="bio-source-bubble bio-blood">🩸</div>
+          <span class="bio-source-label">Blood</span>
+          <span class="bio-arrow">↓</span>
+        </div>
+        <div class="bio-source">
+          <div class="bio-source-bubble bio-stool">💩</div>
+          <span class="bio-source-label">Stool</span>
+          <span class="bio-arrow">↓</span>
+        </div>
+        <div class="bio-source">
+          <div class="bio-source-bubble bio-urine">🧪</div>
+          <span class="bio-source-label">Urine</span>
+          <span class="bio-arrow">↓</span>
+        </div>
+      </div>
+      <!-- Analysis type boxes (3 columns × 2 rows) -->
+      <div class="analysis-columns">
+        <!-- Column 1 -->
+        <div>
+          <a href="overviews/metagenomics.html" class="acol-box">
+            <i class="fas fa-dna" aria-hidden="true"></i>
+            Metagenomics
+          </a>
+          <a href="overviews/metatranscriptomics.html" class="acol-box">
+            <i class="fas fa-wave-square" aria-hidden="true"></i>
+            Metatranscriptomics
+          </a>
+        </div>
+        <!-- Column 2 -->
+        <div>
+          <a href="overviews/metabolomics.html" class="acol-box">
+            <i class="fas fa-vial" aria-hidden="true"></i>
+            Metabolomics
+          </a>
+          <a href="overviews/proteomics.html" class="acol-box">
+            <i class="fas fa-atom" aria-hidden="true"></i>
+            Proteomics
+          </a>
+        </div>
+        <!-- Column 3 -->
+        <div>
+          <a href="#" class="acol-box">
+            <i class="fas fa-notes-medical" aria-hidden="true"></i>
+            Clinical Data
+          </a>
+          <a href="#" class="acol-box">
+            <i class="fas fa-x-ray" aria-hidden="true"></i>
+            Imaging
+          </a>
+        </div>
+      </div>
+    </div><!-- end tab-pilot -->
+    <!-- ========================
+         TAB: HEALTHY AGING
+         ======================== -->
+    <div id="tab-healthy-aging" class="tab-content">
+      <div class="sample-circle" title="Healthy Aging cohort sample size">
+        <span class="sc-number">112</span>
+        <span class="sc-label">Participants</span>
+      </div>
+      <div class="bio-diagram">
+        <div class="bio-source">
+          <div class="bio-source-bubble bio-blood">🩸</div>
+          <span class="bio-source-label">Blood</span>
+          <span class="bio-arrow">↓</span>
+        </div>
+        <div class="bio-source">
+          <div class="bio-source-bubble bio-stool">💩</div>
+          <span class="bio-source-label">Stool</span>
+          <span class="bio-arrow">↓</span>
+        </div>
+        <div class="bio-source">
+          <div class="bio-source-bubble bio-urine">🧪</div>
+          <span class="bio-source-label">Urine</span>
+          <span class="bio-arrow">↓</span>
+        </div>
+      </div>
+      <div class="analysis-columns">
+        <div>
+          <a href="overviews/metagenomics.html" class="acol-box">
+            <i class="fas fa-dna" aria-hidden="true"></i>
+            Metagenomics
+          </a>
+          <a href="overviews/metabolomics.html" class="acol-box">
+            <i class="fas fa-vial" aria-hidden="true"></i>
+            Metabolomics
+          </a>
+        </div>
+        <div>
+          <a href="overviews/proteomics.html" class="acol-box">
+            <i class="fas fa-atom" aria-hidden="true"></i>
+            Proteomics
+          </a>
+          <a href="#" class="acol-box">
+            <i class="fas fa-notes-medical" aria-hidden="true"></i>
+            Clinical Data
+          </a>
+        </div>
+        <div>
+          <a href="overviews/metatranscriptomics.html" class="acol-box">
+            <i class="fas fa-wave-square" aria-hidden="true"></i>
+            Metatranscriptomics
+          </a>
+          <a href="#" class="acol-box">
+            <i class="fas fa-x-ray" aria-hidden="true"></i>
+            Imaging
+          </a>
+        </div>
+      </div>
+    </div><!-- end tab-healthy-aging -->
+    <!-- ========================
+         TAB: PARKINSON'S DISEASE
+         ======================== -->
+    <div id="tab-parkinsons" class="tab-content">
+      <div class="sample-circle" title="Parkinson's Disease cohort sample size">
+        <span class="sc-number">87</span>
+        <span class="sc-label">Participants</span>
+      </div>
+      <div class="bio-diagram">
+        <div class="bio-source">
+          <div class="bio-source-bubble bio-blood">🩸</div>
+          <span class="bio-source-label">Blood</span>
+          <span class="bio-arrow">↓</span>
+        </div>
+        <div class="bio-source">
+          <div class="bio-source-bubble bio-stool">💩</div>
+          <span class="bio-source-label">Stool</span>
+          <span class="bio-arrow">↓</span>
+        </div>
+        <div class="bio-source">
+          <div class="bio-source-bubble bio-urine">🧪</div>
+          <span class="bio-source-label">Urine</span>
+          <span class="bio-arrow">↓</span>
+        </div>
+      </div>
+      <div class="analysis-columns">
+        <div>
+          <a href="overviews/metagenomics.html" class="acol-box">
+            <i class="fas fa-dna" aria-hidden="true"></i>
+            Metagenomics
+          </a>
+          <a href="overviews/metatranscriptomics.html" class="acol-box">
+            <i class="fas fa-wave-square" aria-hidden="true"></i>
+            Metatranscriptomics
+          </a>
+        </div>
+        <div>
+          <a href="overviews/proteomics.html" class="acol-box">
+            <i class="fas fa-atom" aria-hidden="true"></i>
+            Proteomics
+          </a>
+          <a href="#" class="acol-box">
+            <i class="fas fa-notes-medical" aria-hidden="true"></i>
+            Clinical Data
+          </a>
+        </div>
+        <div>
+          <a href="overviews/metabolomics.html" class="acol-box">
+            <i class="fas fa-vial" aria-hidden="true"></i>
+            Metabolomics
+          </a>
+          <a href="#" class="acol-box">
+            <i class="fas fa-x-ray" aria-hidden="true"></i>
+            Imaging
+          </a>
+        </div>
+      </div>
+    </div><!-- end tab-parkinsons -->
+  </main>
+  <script>
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.getElementById('tab-' + tabId).classList.add('active');
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+    }
+  </script>
+</body>
+</html>

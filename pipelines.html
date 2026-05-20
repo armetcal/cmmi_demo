@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pipelines – CMMI</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>Pipelines</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <h1 class="page-section-title"><span></span>Bioinformatics Pipelines</h1>
+    <div class="pipeline-grid">
+      <div class="pipeline-card">
+        <h3><span class="aicon aicon-mg" style="display:inline-flex;margin-right:8px;">MG</span>
+            Metagenomics Pipeline</h3>
+        <p>
+          Shotgun metagenomics: raw FASTQ → quality control (fastp) →
+          host removal (Bowtie2/hg38) → taxonomic profiling (MetaPhlAn4) →
+          functional annotation (HUMAnN3) → phyloseq object.
+        </p>
+        <a href="tutorials/metagenomics.html">
+          <i class="fas fa-book-open" aria-hidden="true"></i> View Tutorial
+        </a>
+      </div>
+      <div class="pipeline-card">
+        <h3><span class="aicon aicon-mt" style="display:inline-flex;margin-right:8px;">MT</span>
+            Metatranscriptomics Pipeline</h3>
+        <p>
+          RNA-seq: raw FASTQ → QC (fastp) → rRNA depletion (SortMeRNA) →
+          host removal → alignment (STAR) → feature counts → DESeq2/edgeR.
+        </p>
+        <a href="tutorials/metatranscriptomics.html">
+          <i class="fas fa-book-open" aria-hidden="true"></i> View Tutorial
+        </a>
+      </div>
+      <div class="pipeline-card">
+        <h3><span class="aicon aicon-mb" style="display:inline-flex;margin-right:8px;">MB</span>
+            Metabolomics Pipeline</h3>
+        <p>
+          Untargeted LC-MS: raw mzXML → peak detection (XCMS) →
+          alignment → annotation (HMDB/KEGG) → normalisation →
+          statistical analysis in R.
+        </p>
+        <a href="tutorials/metabolomics.html">
+          <i class="fas fa-book-open" aria-hidden="true"></i> View Tutorial
+        </a>
+      </div>
+      <div class="pipeline-card">
+        <h3><span class="aicon aicon-pt" style="display:inline-flex;margin-right:8px;">PT</span>
+            Proteomics Pipeline</h3>
+        <p>
+          DIA proteomics: raw spectra → library generation → DIA-NN
+          database search → protein-level quantification →
+          normalisation → differential abundance (MSstats).
+        </p>
+        <a href="tutorials/proteomics.html">
+          <i class="fas fa-book-open" aria-hidden="true"></i> View Tutorial
+        </a>
+      </div>
+      <div class="pipeline-card">
+        <h3><span class="aicon aicon-ci" style="display:inline-flex;margin-right:8px;">CI</span>
+            Clinical Data Pipeline</h3>
+        <p>
+          Clinical metadata: REDCap export → data harmonisation →
+          QC checks → linkage with omics datasets →
+          R/Python analysis-ready tables.
+        </p>
+        <a href="#"><i class="fas fa-book-open" aria-hidden="true"></i> View Tutorial</a>
+      </div>
+      <div class="pipeline-card">
+        <h3><i class="fas fa-layer-group" style="margin-right:8px;color:var(--secondary)"></i>
+            Multi-omics Integration</h3>
+        <p>
+          Joint analysis framework combining all four omics layers using
+          DIABLO (mixOmics), MOFA+, or custom R/Python workflows.
+          Produces integrated factor models and co-abundance networks.
+        </p>
+        <a href="#"><i class="fas fa-book-open" aria-hidden="true"></i> View Tutorial</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

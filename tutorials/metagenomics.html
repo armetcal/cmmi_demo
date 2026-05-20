@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metagenomics Tutorial – CMMI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <!-- Header Banner -->
+  <header class="page-header">
+    <a href="../index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <h2>Metagenomics – Tutorial</h2>
+    <a href="https://github.com/armetcal/cmmi_demo" target="_blank" rel="noopener" class="right-link">
+      <i class="fab fa-github" aria-hidden="true"></i> GitHub Repo
+    </a>
+  </header>
+  <main class="page-content">
+    <div class="tutorial-card">
+      <h2>Overview</h2>
+      <p>
+        This tutorial walks through the CMMI metagenomics pipeline step-by-step.
+        You should have access to Sockeye / Compute Canada and have your FASTQ files
+        in the appropriate project directory before starting.
+      </p>
+      <h2>Step 1 – Quality Control</h2>
+      <p>
+        Run <code>fastp</code> on each pair of FASTQ files to remove low-quality reads,
+        trim adapters, and generate a QC report.
+      </p>
+      <pre>fastp \
+  --in1 sample_R1.fastq.gz \
+  --in2 sample_R2.fastq.gz \
+  --out1 sample_R1_clean.fastq.gz \
+  --out2 sample_R2_clean.fastq.gz \
+  --html sample_qc.html \
+  --thread 8</pre>
+      <p>Review the HTML report and flag any samples with &lt;10 M clean reads.</p>
+      <h2>Step 2 – Host Read Removal</h2>
+      <p>
+        Align reads against the human reference genome (hg38) using
+        <code>Bowtie2</code> and retain only <em>unmapped</em> reads.
+      </p>
+      <pre>bowtie2 \
+  -x /ref/hg38/hg38 \
+  -1 sample_R1_clean.fastq.gz \
+  -2 sample_R2_clean.fastq.gz \
+  --un-conc-gz sample_nonhost.fastq.gz \
+  -p 16 \
+  -S /dev/null</pre>
+      <h2>Step 3 – Taxonomic Profiling</h2>
+      <p>Run <code>MetaPhlAn4</code> on the host-free reads.</p>
+      <pre>metaphlan \
+  sample_nonhost.fastq.gz \
+  --input_type fastq \
+  --bowtie2db /ref/metaphlan4_db \
+  --nproc 16 \
+  -o sample_metaphlan.txt</pre>
+      <h2>Step 4 – Functional Profiling</h2>
+      <p>Run <code>HUMAnN3</code> to obtain gene family and pathway abundances.</p>
+      <pre>humann \
+  --input sample_nonhost.fastq.gz \
+  --output sample_humann/ \
+  --threads 16 \
+  --nucleotide-database /ref/chocophlan \
+  --protein-database /ref/uniref90</pre>
+      <p>Join outputs for downstream R analysis:</p>
+      <pre>humann_join_tables \
+  --input /path/to/humann_outputs \
+  --output all_genefamilies.tsv \
+  --file_name genefamilies</pre>
+      <h2>Step 5 – Build phyloseq Object</h2>
+      <p>
+        Import the MetaPhlAn and HUMAnN output tables into R and construct a
+        <code>phyloseq</code> object for downstream statistical analysis.
+      </p>
+      <pre><code class="r"># Example R code
+library(phyloseq)
+library(tidyverse)
+taxa <- read_tsv("merged_metaphlan.tsv", skip = 1)
+meta <- read_csv("sample_metadata.csv")
+# ... (see full script in /arc/project/cmmi/scripts/build_phyloseq.R)
+</code></pre>
+      <h2>Troubleshooting</h2>
+      <ul>
+        <li>Ensure Conda environment <code>cmmi-mg</code> is activated before running any step.</li>
+        <li>If MetaPhlAn fails with a database error, re-download with <code>metaphlan --install</code>.</li>
+        <li>HUMAnN nucleotide search can be slow — allow 4–8 h per sample on a 16-core node.</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>

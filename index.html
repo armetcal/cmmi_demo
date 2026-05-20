@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CMMI – Research Data Portal</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body class="home-page">
+  <div class="home-container">
+    <header class="home-header">
+      <h1>Centre for Microbiome Medicine &amp; Immunology</h1>
+      <p class="subtitle">Research Data Portal</p>
+    </header>
+    <div class="search-container">
+      <input type="text" id="search-input" class="search-bar"
+             placeholder="Search all pages…" aria-label="Search site content" />
+      <button class="search-btn" onclick="performSearch()" aria-label="Search">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+    <div id="search-results" class="search-results" role="listbox"></div>
+    <nav class="home-nav" aria-label="Main navigation">
+      <a href="about.html" class="nav-box">
+        <i class="fas fa-info-circle nav-icon" aria-hidden="true"></i>
+        <span>About</span>
+      </a>
+      <a href="current-projects.html" class="nav-box">
+        <i class="fas fa-flask nav-icon" aria-hidden="true"></i>
+        <span>Current Projects</span>
+      </a>
+      <a href="sample-overview.html" class="nav-box">
+        <i class="fas fa-microscope nav-icon" aria-hidden="true"></i>
+        <span>Sample Overview</span>
+      </a>
+      <a href="pipelines.html" class="nav-box">
+        <i class="fas fa-sitemap nav-icon" aria-hidden="true"></i>
+        <span>Pipelines</span>
+      </a>
+    </nav>
+  </div>
+  <script src="js/search.js"></script>
+</body>
+</html>
